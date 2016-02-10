@@ -8,6 +8,13 @@
     function HomeCtrl() {
         var vm = this;
 		
-		vm.items = ['One','Two','Three'];
+		vm.sourceItems = ['One','Two','One 2','Three'];
+		vm.selectedItems = [];
+		
+		vm.onItemSelected = onItemSelected;
+		
+		function onItemSelected(item) {
+			vm.selectedItems.push(item);
+		}
     }
 })();

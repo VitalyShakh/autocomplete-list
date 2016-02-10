@@ -2,30 +2,48 @@
 <html ng-app='app'>
   <head>
     <title>Autocomplete List</title>
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
+	<link rel='stylesheet' href='css/autocomplete.css'></link>
+	<link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css' integrity='sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7' crossorigin='anonymous'></link>
+	<script src='https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js'></script>
+    <script src='https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js'></script>
   </head>
   <body>
-	<div ng-controller="homeCtrl as vm">
-		<my-item-list items='vm.items'></my-item-list>
+	<div ng-controller='homeCtrl as vm'>
+		<my-autocomplete source-items='vm.sourceItems' item-selected='vm.onItemSelected(item)'></my-autocomplete>
+		<my-item-list items='vm.selectedItems'></my-item-list>
 	</div>
 	
 	<script src='js/app.js'></script>
 	<script src='js/homeCtrl.js'></script>
 	<script src='js/directives/myItemList.js'></script>
+	<script src='js/directives/myAutocomplete.js'></script>
 	
 	<script type='text/ng-template' id='myItemList'>
 		<div class='col-sm-6'>
-			<ul class="list-group">
-				<li ng-repeat="item in vm.items" class="list-group-item">
+			<ul class='list-group'>
+				<li ng-repeat='item in vm.items track by $index' class='list-group-item'>
 					{{ item }}
-					<button type="button" ng-click='vm.remove(item)' 
-						    class="btn btn-danger btn-xs pull-right">
+					<button type='button' ng-click='vm.remove(item)' 
+						    class='btn btn-danger btn-xs pull-right'>
 						x
 					</button>
 				</li>
 			</ul>
+		</div>
+	</script>	
+	
+	<script type='text/ng-template' id='myAutocomplete'>
+		<div class='autocomplete'>
+			<input ng-model='vm.term' ng-focus='vm.onFocus()' ng-blur='vm.onBlur()' />
+			<div class='col-sm-2 dropdown' ng-show='vm.dropdownIsVisible'>
+				<div class="list-group">
+					<button ng-repeat='item in vm.matchingItems track by $index' 
+							ng-mousedown='vm.select(item)'type="button" 
+							class="list-group-item">
+						{{ item }}
+					</button>
+				</div>
+			</div>
 		</div>
 	</script>
   </body>

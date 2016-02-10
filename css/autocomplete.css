@@ -1,0 +1,19 @@
+.autocomplete {
+	position: relative;
+}
+
+.autocomplete input {
+	margin: 5px 20px;
+ }
+
+.autocomplete .dropdown {
+	position: absolute;
+	top: 35px;
+	z-index: 100;
+}
+
+.autocomplete .dropdown .list-group {
+	height: 200px;
+	overflow-y: auto;
+	overflow-x: hidden;
+}

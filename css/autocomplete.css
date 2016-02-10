@@ -9,7 +9,9 @@
 .autocomplete .dropdown {
 	position: absolute;
 	top: 35px;
+	left: 20px;
 	z-index: 100;
+	width: 175px;
 }
 
 .autocomplete .dropdown .list-group {

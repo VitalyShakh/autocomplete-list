@@ -35,7 +35,7 @@
 	<script type='text/ng-template' id='myAutocomplete'>
 		<div class='autocomplete'>
 			<input ng-model='vm.term' ng-focus='vm.onFocus()' ng-blur='vm.onBlur()' />
-			<div class='col-sm-2 dropdown' ng-show='vm.dropdownIsVisible'>
+			<div class='dropdown' ng-show='vm.dropdownIsVisible'>
 				<div class="list-group">
 					<button ng-repeat='item in vm.matchingItems track by $index' 
 							ng-mousedown='vm.select(item)'type="button" 
